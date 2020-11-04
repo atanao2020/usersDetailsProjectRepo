@@ -2,7 +2,7 @@ const express      = require('express'),
       app          = express(),
       mongoose     = require('mongoose'),
       port         = 2020,
-      User         =  require("./models/Users")
+      User         =  require("./models/Users") //import UsersSchema from models directory
 
 //========================= MongooseDB Connection
 mongoose.connect('mongodb+srv://atanao:dontinon@cluster0.enweg.mongodb.net/UsersDB?retryWrites=true&w=majority', 
@@ -14,9 +14,13 @@ mongoose.connect('mongodb+srv://atanao:dontinon@cluster0.enweg.mongodb.net/Users
         console.log("Connection made to database successfully")
    }
 )
-
+ 
+// Built-in middleware function in Express which parses incoming requests 
+// with urlencoded payloads and is based on body-parser.
 app.use(express.urlencoded({ extended: true }))
-app.set("view engine","ejs")
+
+// Defines the directory where to look for view files
+app.set("view engine","ejs") 
 
 //============root route to go to the index.ejs
 app.get('/', (req, res) =>{
@@ -41,7 +45,7 @@ app.post('/user-details', function(req, res) {
     .then(function(user){
         console.log('User Details Saved')
         console.log(user)
-        res.send("User Details Saved Successfully")
+        res.send("User Details" + ' ' + user + ' ' + "has been Successfully Saved")
     })
     .catch(function(err){
         console.log(err)

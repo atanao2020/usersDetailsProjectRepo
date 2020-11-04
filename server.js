@@ -25,7 +25,7 @@ app.get('/', (req, res) =>{
 
 //==================posting user details from the form to the database
 app.post('/user-details', function(req, res) {
-    console.log("Book POST route hit")
+    console.log("User Details POST route hit")
     console.log(req.body)
     var firstName = req.body.firstName
     var lastName = req.body.lastName
@@ -41,6 +41,7 @@ app.post('/user-details', function(req, res) {
     .then(function(user){
         console.log('User Details Saved')
         console.log(user)
+        res.send("User Details Saved Successfully")
     })
     .catch(function(err){
         console.log(err)
